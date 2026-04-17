@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="haze/haze.vcxproj" Id="b0c97eae-9fd6-41a4-9da9-4afa9fd3906b">
+    <BuildType Solution="Debug|x64" Project="Release" />
+  </Project>
+</Solution>
