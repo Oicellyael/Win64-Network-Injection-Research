@@ -1,4 +1,9 @@
 #pragma once
+// winsock2 must come before windows.h to avoid winsock.h conflicts
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <netioapi.h>
+#include <iphlpapi.h>
 #include <windows.h>
 #include <cstdint>
 
@@ -46,6 +51,11 @@ typedef struct _SYSCALL_BRIDGE {
     uintptr_t NtWriteAddr;
     uintptr_t NtThreadAddr;
 } SYSCALL_BRIDGE, *PSYSCALL_BRIDGE;
+
+
+typedef DWORD(WINAPI* pGetIpNetTable2)(ADDRESS_FAMILY Family, PMIB_IPNET_TABLE2* Table);
+typedef void(WINAPI* pFreeMibTable)(PVOID Memory);
+typedef DWORD(WINAPI* pSendARP)(IPAddr DestIP, IPAddr SrcIP, PVOID pMacAddr, PULONG PhyAddrLen);
 
 // =========== ASM FUNCTIONS (INDIRECT CALLS) ==========
 extern "C" NTSTATUS Syscall_NtAllocateVirtualMemory(HANDLE ProcessHandle, PVOID* BaseAddress, ULONG_PTR ZeroBits, PSIZE_T RegionSize, ULONG AllocationType, ULONG Protect);
